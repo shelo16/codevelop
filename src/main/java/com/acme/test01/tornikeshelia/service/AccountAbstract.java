@@ -33,6 +33,7 @@ public abstract class AccountAbstract implements AccountService {
             throw new GeneralException(AcmeError.INVALID_REQUEST);
         }
 
+        /** Would use Builder here, but ran out of time **/
         savingsAccount = new SavingsAccount(1L,
                 customerNum,
                 amountToDeposit,
@@ -52,6 +53,7 @@ public abstract class AccountAbstract implements AccountService {
             throw new GeneralException(AcmeError.INVALID_REQUEST);
         }
 
+        /** Would use Builder here, but ran out of time **/
         currentAccount = new CurrentAccount(1L,
                 customerNum,
                 BigDecimal.ZERO,

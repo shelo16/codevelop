@@ -24,14 +24,15 @@ public class SavingsAccountImpl extends AccountAbstract {
     public void withdraw(Long accountId, BigDecimal amountToWithdraw) throws AccountNotFoundException, WithdrawalAmountTooLargeException {
         SavingsAccount savingsAccount = savingsAccountRepository.getAccount(accountId);
         if (savingsAccount == null) {
-            throw new AccountNotFoundException(AcmeError.INVALID_REQUEST);
+            throw new AccountNotFoundException(AcmeError.ACCOUNT_NOT_FOUND);
         }
 
         BigDecimal currentBalance = savingsAccount.getBalance();
 
         // Check if the withdrawal amount is valid
+        /** This would be done with parameter validation by spring validator **/
         if (currentBalance.subtract(amountToWithdraw).compareTo(BigDecimal.valueOf(1000L)) < 0) {
-            throw new WithdrawalAmountTooLargeException(AcmeError.INVALID_REQUEST);
+            throw new WithdrawalAmountTooLargeException(AcmeError.INVALID_AMOUNT);
         }
 
         // Perform the withdrawal logic
@@ -45,11 +46,12 @@ public class SavingsAccountImpl extends AccountAbstract {
         SavingsAccount savingsAccount = savingsAccountRepository.getAccount(accountId);
 
         if (savingsAccount == null) {
-            throw new AccountNotFoundException(AcmeError.INVALID_REQUEST);
+            throw new AccountNotFoundException(AcmeError.ACCOUNT_NOT_FOUND);
         }
 
+        /** This would be done with parameter validations by spring validator **/
         if (amountToDeposit.compareTo(BigDecimal.ZERO) <= 0) {
-            throw new GeneralException(AcmeError.INVALID_REQUEST);
+            throw new GeneralException(AcmeError.INVALID_AMOUNT);
         }
 
         // Perform the deposit logic

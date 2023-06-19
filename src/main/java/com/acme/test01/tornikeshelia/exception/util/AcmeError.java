@@ -8,7 +8,9 @@ import org.springframework.http.HttpStatus;
 @RequiredArgsConstructor
 public enum AcmeError {
 
-    INVALID_REQUEST("Invalid Request", HttpStatus.BAD_REQUEST);
+    INVALID_REQUEST("Invalid Request", HttpStatus.BAD_REQUEST),
+    INVALID_AMOUNT("Invalid Amount", HttpStatus.BAD_REQUEST),
+    ACCOUNT_NOT_FOUND("Coulnt find account with given parameters", HttpStatus.NOT_FOUND);
 
 
     private final String description;

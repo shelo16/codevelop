@@ -23,15 +23,16 @@ public class CurrentAccountImpl extends AccountAbstract {
         CurrentAccount currentAccount =
                 currentAccountRepository.getAccount(accountId);
         if (currentAccount == null) {
-            throw new AccountNotFoundException(AcmeError.INVALID_REQUEST);
+            throw new AccountNotFoundException(AcmeError.ACCOUNT_NOT_FOUND);
         }
 
         BigDecimal currentBalance = currentAccount.getBalance();
         BigDecimal overdraftLimit = currentAccount.getOverDraftLimit();
         BigDecimal maxWithdrawalAmount = currentBalance.add(overdraftLimit);
 
+        /** This would be done with parameter validation with Spring Validator **/
         if (amountToWithdraw.compareTo(maxWithdrawalAmount) > 0) {
-            throw new WithdrawalAmountTooLargeException(AcmeError.INVALID_REQUEST);
+            throw new WithdrawalAmountTooLargeException(AcmeError.INVALID_AMOUNT);
         }
 
         BigDecimal updatedBalance = currentBalance.subtract(amountToWithdraw);
@@ -46,10 +47,12 @@ public class CurrentAccountImpl extends AccountAbstract {
         CurrentAccount currentAccount =
                 currentAccountRepository.getAccount(accountId);
         if (currentAccount == null) {
-            throw new AccountNotFoundException(AcmeError.INVALID_REQUEST);
+            throw new AccountNotFoundException(AcmeError.ACCOUNT_NOT_FOUND);
         }
+
+        /** This would be done with Parameter validation in Spring validator **/
         if (amountToDeposit.compareTo(BigDecimal.ZERO) <= 0) {
-            throw new GeneralException(AcmeError.INVALID_REQUEST);
+            throw new GeneralException(AcmeError.INVALID_AMOUNT);
         }
 
         // Perform the deposit logic
