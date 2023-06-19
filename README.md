@@ -2,9 +2,9 @@
 solution for test task
 
 # Technologies: 
-Java Version : 17
-Spring Boot Version : 3.1.0
-Maven
+* Java Version : 17
+* Spring Boot Version : 3.1.0
+* Maven
 
 # Comment
 Things I would do differently/add if I had more time : 
