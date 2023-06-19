@@ -1,6 +1,8 @@
 # codevelop
 solution for test task
 
+Java Version : 17
+
 Things I would do differently/add if I had more time : 
 
 * Logging using AOP
